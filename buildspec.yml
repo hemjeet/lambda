@@ -2,17 +2,14 @@ version: 0.2
 
 env:
   variables:
-    IMAGE_TAG: 
-      - "v3"  
-    IMAGE_REPO_NAME: 
-      - "ci-cd-demo"
+    IMAGE_TAG: "v3"  # ✅ Plain string value
+    IMAGE_REPO_NAME: "ci-cd-demo"  # ✅ Plain string value
 
 phases:
   pre_build:
     commands:
       - echo "Logging in to ECR..."
       - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com
-      - echo "Using custom tag: $IMAGE_TAG"
 
   build:
     commands:
@@ -22,4 +19,4 @@ phases:
   post_build:
     commands:
       - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG
-
+      - echo "Pushed image with custom tag: $IMAGE_TAG"
