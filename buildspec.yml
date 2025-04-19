@@ -2,7 +2,7 @@ version: 0.2
 
 env:
   variables:
-    IMAGE_TAG: "v3"  # Override with your own tag
+    IMAGE_TAG: "v3"  
     IMAGE_REPO_NAME: "ci-cd-demo"
 
 phases:
