@@ -2,8 +2,8 @@ version: 0.2
 
 env:
   variables:
-    IMAGE_TAG: "v5"  # ✅ Plain string value
-    IMAGE_REPO_NAME: "ci-cd-demo" 
+    IMAGE_TAG: "7"  # ✅ Plain string value
+    IMAGE_REPO_NAME: "ci-cd-demo"  # ✅ Plain string value
 
 phases:
   pre_build:
@@ -15,15 +15,8 @@ phases:
     commands:
       - docker build -t $IMAGE_REPO_NAME:$IMAGE_TAG .
       - docker tag $IMAGE_REPO_NAME:$IMAGE_TAG $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG
-      - echo "Preparing deployment artifacts..."
-      - echo "$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG" > image_uri.txt
 
   post_build:
     commands:
       - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG
-
-
-artifacts:
-  files:
-    -  appspec.yml
-    -  image_uri.txt
+      - aws lambda update-function-code --function-name $LAMBDA_FUNCTION_NAME --image-uri $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG
