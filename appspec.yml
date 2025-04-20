@@ -3,5 +3,7 @@ Resources:
   - TargetService:
       Type: AWS::Lambda::Function
       Properties:
-        Name: "demo-ml"  # Your exact Lambda name
-        Alias: "dev"     # Must exist (create if missing)
+        Name: "demo-ml"       # Your exact Lambda function name
+        Alias: "dev"          # Must exist (create if missing)
+        CurrentVersion: "$LATEST"  # Required field for container deployments
+        TargetVersion: "$LATEST"   # Required field for container deployments
