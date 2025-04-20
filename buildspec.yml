@@ -3,7 +3,7 @@ version: 0.2
 env:
   variables:
     IMAGE_TAG: "v5"  # ✅ Plain string value
-    IMAGE_REPO_NAME: "ci-cd-demo"  # ✅ Plain string value
+    IMAGE_REPO_NAME: "ci-cd-demo" 
 
 phases:
   pre_build:
