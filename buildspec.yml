@@ -28,6 +28,6 @@ phases:
 
 artifacts:
   files:
-    - appspec.yml
-    - image_uri.txt
+    -  codebuild_output/appspec.yml
+    -  codebuild_output/image_uri.txt
   base-directory: "codebuild_output"  # CodePipeline will pass these to CodeDeploy
