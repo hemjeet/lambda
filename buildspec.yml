@@ -2,8 +2,8 @@ version: 0.2
 
 env:
   variables:
-    IMAGE_TAG: "7"  # ✅ Plain string value
-    IMAGE_REPO_NAME: "ci-cd-demo"  # ✅ Plain string value
+    IMAGE_TAG: "8"
+    LAMBDA_ALIAS: 'dev'
 
 phases:
   pre_build:
